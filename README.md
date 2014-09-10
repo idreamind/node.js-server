@@ -1,4 +1,4 @@
 node.js-server
 ==============
 
-The nNode.js web-app server.
+The Node.js web-app server.
