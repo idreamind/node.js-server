@@ -10,8 +10,17 @@ function start( route, handler ) {
     function onRequest( request, response ) {
         console.log( " Request receiver " );
 
+        var postData = '';
         var pathName = url.parse(request.url).pathname;
-        route( handler, pathName, response, request  );
+
+        request.setEncoding("utf8");
+        request.addListener("data", function(postDataChunk) {
+            postData += postDataChunk;
+        });
+        request.addListener("end", function() {
+            route( handler, pathName, response, request, postData );
+        });
+//        route( handler, pathName, response, request, postData );
     }
 
     http.createServer( onRequest ).listen(8888);

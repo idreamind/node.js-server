@@ -18,7 +18,7 @@ function getSDataService($http) {
             .catch(getDataFailed);
 
         function getDataComplete(response) {
-            return response.data.result;
+            return response.data;
         }
 
         function getDataFailed(error) {

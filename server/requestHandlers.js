@@ -7,7 +7,7 @@ var querystring = require("querystring"),
              fs = require("fs");
 
 // Only for start:
-function start( response, request, pathName ) {
+function start( response, request, pathName, postData ) {
     fs.readFile("templates/app.html", function( error, data ) {
         if( error ) {
             response.writeHead(200, { "Content-type": "text/html" });
@@ -21,7 +21,7 @@ function start( response, request, pathName ) {
     });
 }
 
-function css( response, request, pathName ) {
+function css( response, request, pathName, postData ) {
 
     var correctPath = pathName.substring(1);
     fs.readFile(correctPath, function( error, data ) {
@@ -37,7 +37,7 @@ function css( response, request, pathName ) {
     });
 }
 
-function js( response, request, pathName ) {
+function js( response, request, pathName, postData ) {
 
     var correctPath = pathName.substring(1);
     fs.readFile(correctPath, function( error, data ) {
@@ -53,6 +53,13 @@ function js( response, request, pathName ) {
     });
 }
 
+function server( response, request, pathName, postData ) {
+    console.log("Received POST data chunk '" + postData + "' ");
+    response.writeHead(200, { "Content-type": "text/plain" });
+    response.write("You've sent: '" + postData + "' ");
+    response.end();
+}
+
 //var postData = '';
 //if( request.method == 'POST' ) {
 //    var form = new formidable.IncomingForm();
@@ -63,6 +70,7 @@ function js( response, request, pathName ) {
 //}
 //    console.log( " Post Data: " + postData );
 
-exports.start = start;
-exports.css   = css;
-exports.js    = js;
+exports.start  = start;
+exports.css    = css;
+exports.js     = js;
+exports.server = server;

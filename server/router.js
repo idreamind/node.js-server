@@ -1,11 +1,11 @@
 /**
  * Created by dreamind on 13.09.2014.
  */
-function route( handler, pathName, response, request ) {
+function route( handler, pathName, response, request, postData ) {
     console.log(" Request for '" + pathName + "' received");
 
     if(typeof handler[pathName] === 'function') {
-        handler[pathName](response, request, pathName);
+        handler[pathName](response, request, pathName, postData);
     } else {
         console.log("No request handler found for '" + pathName + "' ");
         response.writeHead(404, { "Content-type": "text/html" });

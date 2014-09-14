@@ -32,7 +32,7 @@ function deleteSDataService($http) {
     }
 
     function getDataComplete(response) {
-        return response.data.result;
+        return response.data;
     }
 }
 

@@ -16,6 +16,6 @@ handler["/js/ng-modules/getDataSFactory.js"] = requestHandlers.js;
 handler["/js/ng-modules/appendSDataFactory.js"] = requestHandlers.js;
 handler["/js/ng-modules/deleteSDataFactory.js"] = requestHandlers.js;
 handler["/js/ng-modules/dataLoadController.js"] = requestHandlers.js;
-//handler["/server"] = requestHandlers.requests;
+handler["/server"] = requestHandlers.server;
 
 server.start( router.route, handler );
