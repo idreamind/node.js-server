@@ -2,9 +2,10 @@
  * Created by dreamind on 13.09.2014.
  */
 
-var querystring = require("querystring"),
-     formidable = require("formidable"),
-             fs = require("fs");
+var dataReadWrite = require("./../js/ng-modules/dataReadWrite.js"),
+      querystring = require("querystring"),
+       formidable = require("formidable"),
+               fs = require("fs");
 
 // Only for start:
 function start( response, request, pathName, postData ) {
@@ -54,21 +55,31 @@ function js( response, request, pathName, postData ) {
 }
 
 function server( response, request, pathName, postData ) {
-    console.log("Received POST data chunk '" + postData + "' ");
-    response.writeHead(200, { "Content-type": "text/plain" });
-    response.write("You've sent: '" + postData + "' ");
-    response.end();
-}
 
-//var postData = '';
-//if( request.method == 'POST' ) {
-//    var form = new formidable.IncomingForm();
-//    form.parse( request, function( error, fields, files) {
-//        postData = fields.want;
-//        console.log( "All data: " + fields );
-//    });
-//}
-//    console.log( " Post Data: " + postData );
+    var dataFrom = JSON.parse(postData),
+        data = '';
+
+    switch(dataFrom.want) {
+        case "all":
+            dataReadWrite.readData( response );
+            break;
+        case "append":
+            data = dataFrom.data;
+            break;
+        case "rewrite":
+            data = dataFrom.data;
+            break;
+        case "delete":
+            switch (dataFrom.what) {
+                case "all":
+                    data = "Всё удалено!";
+                    break;
+                case "latest":
+                    break;
+            }
+            break;
+    }
+}
 
 exports.start  = start;
 exports.css    = css;

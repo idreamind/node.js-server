@@ -15,7 +15,11 @@ function appendSDataService($http) {
     };
 
     function appendData( sData ) {
-        return $http.post('/server', { data: sData, want: 'append'})
+        var dataSend = JSON.stringify({
+            want: "append",
+            data: sData
+        }, "", 4);
+        return $http.post('/server', dataSend)
             .then(getDataComplete)
             .catch(getDataFailed);
 
@@ -25,7 +29,11 @@ function appendSDataService($http) {
     }
 
     function rewriteData( sData ) {
-        return $http.post('/server', { data: sData, want: 'rewrite'})
+        var dataSend = JSON.stringify({
+            want: "rewrite",
+            data: sData
+        }, "", 4);
+        return $http.post('/server', dataSend)
             .then(getDataComplete)
             .catch(getDataFailed);
 

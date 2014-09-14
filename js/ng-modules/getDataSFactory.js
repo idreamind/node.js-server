@@ -13,7 +13,12 @@ function getSDataService($http) {
     };
 
     function getData() {
-        return $http.post('/server',{want: 'all'})
+
+        var dataSend = JSON.stringify({
+            want: "all"
+        }, "", 4);
+
+        return $http.post('/server', dataSend)
             .then(getDataComplete)
             .catch(getDataFailed);
 

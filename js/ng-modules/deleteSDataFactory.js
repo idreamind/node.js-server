@@ -12,7 +12,11 @@ function deleteSDataService($http) {
     };
 
     function deleteAll() {
-        return $http.post('/server', {delete: 'all'})
+        var dataSend = JSON.stringify({
+            want: "delete",
+            what: "all"
+        }, "", 4);
+        return $http.post('/server', dataSend)
             .then(getDataComplete)
             .catch(getDataFailed);
 
@@ -22,7 +26,11 @@ function deleteSDataService($http) {
     }
 
     function deleteLatest() {
-        return $http.post('/server', {delete: 'latest'})
+        var dataSend = JSON.stringify({
+            want: "delete",
+            what: "latest"
+        }, "", 4);
+        return $http.post('/server', dataSend)
             .then(getDataComplete)
             .catch(getDataFailed);
 
