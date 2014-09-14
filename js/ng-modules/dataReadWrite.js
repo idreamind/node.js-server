@@ -17,6 +17,10 @@ function readData( response ) {
             response.errors = error;
         } else {
             getData = JSON.parse( data );
+            getData.days = getData.days.slice(0, -2);
+            getData.weight = getData.weight.slice(0, -2);
+            getData.fat = getData.fat.slice(0, -2);
+            getData.water = getData.water.slice(0, -2);
 
             console.log( "Days: " + getData.days );
             console.log( "Weight: " + getData.weight );
