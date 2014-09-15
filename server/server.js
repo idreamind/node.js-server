@@ -3,12 +3,13 @@
  *
  * This is the main-server file **/
 
-var http = require("http"),
+var colors = require("./../node_modules/colors/colors.js"),
+    http = require("http"),
     url  = require("url");
 
 function start( route, handler ) {
     function onRequest( request, response ) {
-        console.log( " Request receiver " );
+        console.log( " Request receiver ".yellow );
 
         var postData = '';
         var pathName = url.parse(request.url).pathname;
@@ -20,7 +21,6 @@ function start( route, handler ) {
         request.addListener("end", function() {
             route( handler, pathName, response, request, postData );
         });
-//        route( handler, pathName, response, request, postData );
     }
 
     http.createServer( onRequest ).listen(8888);

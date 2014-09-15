@@ -56,25 +56,24 @@ function js( response, request, pathName, postData ) {
 
 function server( response, request, pathName, postData ) {
 
-    var dataFrom = JSON.parse(postData),
-        data = '';
-
+    var dataFrom = JSON.parse(postData);
     switch(dataFrom.want) {
         case "all":
             dataReadWrite.readData( response );
             break;
         case "append":
-            data = dataFrom.data;
+            dataReadWrite.appendData( response, dataFrom.data );
             break;
         case "rewrite":
-            data = dataFrom.data;
+            dataReadWrite.rewriteData( response, dataFrom.data );
             break;
         case "delete":
             switch (dataFrom.what) {
                 case "all":
-                    data = "Всё удалено!";
+                    dataReadWrite.deleteAll( response );
                     break;
                 case "latest":
+                    dataReadWrite.deleteLatest( response );
                     break;
             }
             break;

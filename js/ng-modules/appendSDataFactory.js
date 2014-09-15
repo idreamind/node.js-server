@@ -15,10 +15,13 @@ function appendSDataService($http) {
     };
 
     function appendData( sData ) {
+        sData = JSON.stringify( sData );
+
         var dataSend = JSON.stringify({
             want: "append",
             data: sData
         }, "", 4);
+
         return $http.post('/server', dataSend)
             .then(getDataComplete)
             .catch(getDataFailed);
@@ -29,10 +32,13 @@ function appendSDataService($http) {
     }
 
     function rewriteData( sData ) {
+        sData = JSON.stringify( sData );
+
         var dataSend = JSON.stringify({
             want: "rewrite",
             data: sData
         }, "", 4);
+
         return $http.post('/server', dataSend)
             .then(getDataComplete)
             .catch(getDataFailed);
