@@ -2,7 +2,7 @@
  * Created by dreamind on 12.09.2014.
  */
 angular
-    .module('server')
+    .module('GymGoal')
     .factory('getSDataService', getSDataService);
 
 getSDataService.$inject = ['$http'];

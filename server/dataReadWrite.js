@@ -3,7 +3,7 @@
  */
 
 var fs = require("fs"),
-    colors = require("./../../node_modules/colors/colors.js");
+    colors = require("./../node_modules/colors/colors.js");
 
 function appendData( response, newData ) {
 

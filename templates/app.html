@@ -1,54 +1,98 @@
 <!DOCTYPE html>
-<html ng-app="server">
-<head lang="en">
-    <meta charset="UTF-8">
-    <title ng-init="mv.title='ng-template'">{{mv.title}}</title>
-    <link rel="stylesheet" href="../bower_components/angular/angular-csp.css">
-</head>
-    <body>
-        <div ng-controller="dataLoadController as mv"
-             ng-init='mv.placeholder="{\"days\":\"21/10/2014\", \"weight\":\"77.3\", \"fat\":\"17.3\", \"water\":\"59\"}"'
-             ng-int="mv.whenPaste=''"
-             ng-cloak class="ng-cloak">
-            <code ng-init="mv.dataFromServer='The data will be display here'">
-                {{mv.dataFromServer}}
-            </code>
-            <p>
-                <textarea rows="15" cols="40"
-                          ng-init="mv.dataToServer=mv.placeholder"
-                          ng-model="mv.dataToServer"
-                          ng-click="mv.dataToServer=''"
-                          ng-blur="mv.dataToServer=mv.placeholder"
-                          ng-paste="mv.whenPaste='You paste it!'"
-                          ng-keypress="mv.whenPaste=''"
-                          ng-mouseleave="mv.whenPaste=''"></textarea>
-                <em>
-                    {{mv.whenPaste}}
-                </em>
-            </p>
-            <p>
-                <input type="button" ng-click="mv.getSData()" value="GET"> - Click to get data from the Server
-            </p>
-            <p>
-                <input type="button" ng-click="mv.appendSData()" value="APPEND"> - Click to append data to the Server
-            </p>
-            <p>
-                <input type="button" ng-click="mv.rewriteSData()" value="REWRITE"> - Click to rewrite data on the Server
-            </p>
-            <p>
-                <input type="button" ng-click="mv.deleteSData()" value="DELETE"> - Click to delete data from the Server
-            </p>
-            <p>
-                <input type="button" ng-click="mv.deleteLatestSData()" value="DELETE LATEST"> - Click to delete latest data from the Server
-            </p>
+<html ng-app="GymGoal">
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>GymGoal</title>
+        <link rel="stylesheet" type="text/css" href="../css/style.css">
+        <link rel="stylesheet" type="text/css" href="../css/animation.css">
+        <link rel="stylesheet" type="text/css" href="../bower_components/angular/angular-csp.css">
+    </head>
+
+    <body ng-controller="plotDataCtrl as mv">
+
+        <div id="main" ng-cloak>
+            <div id="plot-view" ng-init="mv.inputData = mv.inputInitialization()">
+
+                <div class="data-line">
+                    <input type="button" value="watch settings: {{mv.showclick}}" class="buttons-long" ng-click="mv.toggle('showclick')">
+                </div>
+                <div id="plot-settings" ng-Hide="mv.showclick" class="animate-hide">
+                    <input type="text" ng-model="mv.inputData.weight"
+                                       ng-change="mv.changePlotData( 'weight' )"
+                                       ng-keyup="mv.validation('weight')" id="weight" placeholder="Enter your weight here" class="plot-data">
+                    <input type="text" ng-model="mv.inputData.fat"
+                                       ng-change="mv.changePlotData( 'fat' )"
+                                       ng-keyup="mv.validation('fat')" id="fat" placeholder="Enter your fat % here" class="plot-data">
+                    <input type="text" ng-model="mv.inputData.water"
+                                       ng-change="mv.changePlotData( 'water' )"
+                                       ng-keyup="mv.validation('water')" id="water" placeholder="Enter your water % here" class="plot-data">
+                    <div class="data-line">
+                        <input type="text" ng-model="mv.inputData.goal"
+                                           ng-change="mv.handleGoalPoin()"
+                                           ng-keyup="mv.validation('goal')" id="goal" placeholder="Enter you goal" class="plot-data-small">
+                        <input type="text" ng-model="mv.inputData.when"
+                                           ng-change="mv.handleGoalPoin()"
+                                           ng-keyup="mv.validation('when')" id="when" placeholder="Enter date" class="plot-data-small">
+                        <input type="button" value="simple" ng-click="mv.goalClass='plot-point'" class="buttons">
+                        <input type="button" value="mass" ng-click="mv.goalClass='plot-point-mass'" class="buttons">
+                        <input type="button" value="force" ng-click="mv.goalClass='plot-point-force'" class="buttons">
+                        <input type="button" value="Delete all{{mv.hoverDelAll}}"
+                               ng-click=""
+                               ng-mouseover="mv.hoverDelAll='. Dangerous!'"
+                               ng-mouseleave="mv.hoverDelAll=''"
+                               class="buttons special-buttons">
+                        <input type="button" value="Delete latest {{mv.hoverDelLat}}"
+                               ng-click=""
+                               ng-mouseover="mv.hoverDelLat='only'"
+                               ng-mouseleave="mv.hoverDelLat=''"
+                               class="buttons special-buttons">
+                        <input type="button" value="Save {{mv.hoverSave}}"
+                               ng-click=""
+                               ng-mouseover="mv.hoverSave=', YES? '"
+                               ng-mouseleave="mv.hoverSave=''"
+                               class="buttons special-buttons">
+                    </div>
+                </div>
+
+                <div id="plot-layout">
+                    <svg id="plot-view-svg" ng-init="mv.svgInitialization()">
+                        <line ng-repeat="vGrid in mv.vGridArr" x1="{{vGrid * step}}" y1="0" x2="{{vGrid * step}}" y2="1000" class="v-grid"></line>
+                        <polyline points="{{ mv.weight }}" class="plot-line-white"></polyline>
+                        <polyline points="{{ mv.fat }}" class="plot-line-magenta"></polyline>
+                        <polyline points="{{ mv.water }}" class="plot-line-yellow"></polyline>
+                        <circle r="15" cx="{{mv.when}}" cy="{{mv.goal}}" ng-class="mv.goalClass"></circle>
+                        <text x="{{mv.when + 20}}" y="{{mv.goal + 5}}" class="goal-label">
+                            {{mv.inputData.goal}}
+                        </text>
+                    </svg>
+                    <input type="range" ng-init="mv.settingsData.h_range = 50"
+                                        ng-model="mv.settingsData.h_range"
+                                        ng-change="mv.stepWatcher()" min="10" max="250" class="h-range-data">
+                    <label class="data-label-h" style="left: calc(5% + {{mv.settingsData.h_range - 25}}px);">
+                        {{mv.settingsData.h_range}}
+                    </label>
+
+
+                     <input type="range" ng-init="mv.settingsData.v_range = 100"
+                                         ng-model="mv.settingsData.v_range"
+                                         ng-change="mv.verticalWatcher()" min="5" max="200" value="50" class="v-range-data">
+                     <label class="data-label-v" style="bottom: calc({{mv.settingsData.v_range}}px + 60px);">
+                        {{mv.settingsData.v_range}}
+                     </label>
+                </div>
+
+            </div>
         </div>
 
-
         <script src="../bower_components/angular/angular.js"></script>
+        <script src="../bower_components/angular-animate/angular-animate.js"></script>
+        <script src="../bower_components/jquery/dist/jquery.js"></script>
         <script src="../js/ng-modules/app.module.js"></script>
         <script src="../js/ng-modules/getDataSFactory.js"></script>
         <script src="../js/ng-modules/appendSDataFactory.js"></script>
         <script src="../js/ng-modules/deleteSDataFactory.js"></script>
-        <script src="../js/ng-modules/dataLoadController.js"></script>
+        <script src="../js/ng-modules/dataLoadFactory.js"></script>
+        <script src="../js/ng-modules/plotDataCtrl.js"></script>
+
     </body>
 </html>

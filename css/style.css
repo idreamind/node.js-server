@@ -1,0 +1,184 @@
+html, body {
+  height: 100%;
+  width: 100%;
+  background: white;
+  overflow: hidden; }
+
+#main {
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  display: block;
+  position: relative;
+  width: 80%;
+  height: auto;
+  margin: auto;
+  top: 100px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.75);
+  background: #00ccff;
+  padding-bottom: 30px; }
+
+#plot-view {
+  width: 100%;
+  padding: 10px 0px;
+  color: white; }
+
+#plot-view-svg {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  display: block;
+  position: relative;
+  width: 90%;
+  height: auto;
+  margin: auto;
+  top: 10px;
+  height: 500px;
+  border: 3px solid white; }
+
+#plot-settings, #plot-layout {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: auto;
+  margin: auto;
+  top: 0px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  background: #33d6ff; }
+
+#plot-layout {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  background: #66e0ff;
+  padding-bottom: 70px; }
+
+.plot-data {
+  display: block;
+  position: relative;
+  width: 90%;
+  height: 25px;
+  margin: auto;
+  top: 5px;
+  border: none;
+  border-left: 5px solid white;
+  border-right: 5px solid white;
+  font-size: 14pt;
+  color: #00ccff; }
+
+.plot-data-small {
+  text-align: center;
+  font-size: 14pt;
+  color: #00ccff;
+  width: 120px;
+  height: 25px;
+  border: none; }
+
+.data-line {
+  display: block;
+  position: relative;
+  width: calc(90% + 10px);
+  height: auto;
+  margin: auto;
+  top: 0px;
+  padding: 10px 0;
+  display: block; }
+
+.h-range-data, .v-range-data {
+  position: absolute;
+  left: 5%;
+  top: 550px;
+  width: 250px; }
+
+.v-range-data {
+  -webkit-appearance: slider-vertical;
+  height: 200px;
+  left: -105px;
+  top: 300px; }
+
+.data-label-h, .data-label-v {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  position: absolute;
+  width: 36px;
+  height: 20px;
+  top: 520px;
+  color: white;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.6);
+  text-align: center;
+  padding: 3px 0; }
+
+.data-label-v {
+  position: absolute;
+  top: auto;
+  left: 35px; }
+
+.goal-label {
+  fill: white;
+  font-weight: normal;
+  cursor: pointer; }
+  .goal-label:hover, .goal-label:active, .goal-label:focus {
+    font-weight: bold; }
+
+.plot-line-white, .plot-line-magenta, .plot-line-yellow {
+  stroke: white;
+  stroke-width: 2px;
+  fill: rgba(255, 255, 255, 0.25); }
+  .plot-line-white:hover, .plot-line-white:active, .plot-line-white:focus, .plot-line-magenta:hover, .plot-line-magenta:active, .plot-line-magenta:focus, .plot-line-yellow:hover, .plot-line-yellow:active, .plot-line-yellow:focus {
+    stroke: #00ff00; }
+
+.plot-line-magenta {
+  stroke: magenta;
+  fill: rgba(0, 0, 255, 0.25); }
+
+.plot-line-yellow {
+  stroke: yellow;
+  fill: rgba(255, 255, 0, 0.25); }
+
+.plot-point, .plot-point-mass, .plot-point-force {
+  stroke-width: 3px;
+  stroke: white;
+  fill: rgba(33, 33, 255, 0.25); }
+  .plot-point:hover, .plot-point:active, .plot-point:focus, .plot-point-mass:hover, .plot-point-mass:active, .plot-point-mass:focus, .plot-point-force:hover, .plot-point-force:active, .plot-point-force:focus {
+    fill: rgba(33, 33, 255, 0.75); }
+
+.plot-point-mass {
+  stroke: chartreuse;
+  fill: rgba(33, 255, 33, 0.25); }
+  .plot-point-mass:hover, .plot-point-mass:active, .plot-point-mass:focus {
+    fill: rgba(33, 255, 33, 0.75); }
+
+.plot-point-force {
+  stroke: crimson;
+  fill: rgba(255, 33, 255, 0.25); }
+  .plot-point-force:hover, .plot-point-force:active, .plot-point-force:focus {
+    fill: rgba(255, 33, 255, 0.75); }
+
+.input-error {
+  border: 4px solid crimson; }
+
+.v-grid {
+  stroke-width: 1px;
+  stroke: rgba(255, 255, 255, 0.5); }
+
+.buttons, .buttons-long {
+  width: 100px;
+  color: #00ccff;
+  font-weight: bold; }
+
+.buttons-long {
+  width: 200px;
+  left: 5%; }
+
+.special-buttons {
+  transition: all ease-in-out 0.333s, ease-in-out, ease-in-out, ease-in-out, ease-in-out, ease-in-out;
+  -o-transition: all ease-in-out 0.333s, ease-in-out, ease-in-out, ease-in-out, ease-in-out, ease-in-out;
+  -moz-transition: all ease-in-out 0.333s, ease-in-out, ease-in-out, ease-in-out, ease-in-out, ease-in-out;
+  -webkit-transition: all ease-in-out 0.333s, ease-in-out, ease-in-out, ease-in-out, ease-in-out, ease-in-out;
+  margin: 0 0 0 10px;
+  position: relative;
+  color: #33d6ff;
+  float: right;
+  width: 150px; }
+  .special-buttons:hover, .special-buttons:focus, .special-buttons:active {
+    color: #00a3cc;
+    width: 165px; }

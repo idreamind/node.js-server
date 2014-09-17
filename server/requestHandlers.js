@@ -2,7 +2,7 @@
  * Created by dreamind on 13.09.2014.
  */
 
-var dataReadWrite = require("./../js/ng-modules/dataReadWrite.js"),
+var dataReadWrite = require("./dataReadWrite.js"),
       querystring = require("querystring"),
        formidable = require("formidable"),
                fs = require("fs");

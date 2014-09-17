@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html ng-app="server">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title ng-init="mv.title='ng-template'">{{mv.title}}</title>
+    <link rel="stylesheet" href="../bower_components/angular/angular-csp.css">
+</head>
+    <body>
+        <div ng-controller="dataLoadController as mv"
+             ng-init='mv.placeholder="{\"days\":\"21/10/2014\", \"weight\":\"77.3\", \"fat\":\"17.3\", \"water\":\"59\"}"'
+             ng-int="mv.whenPaste=''"
+             ng-cloak class="ng-cloak">
+            <code ng-init="mv.dataFromServer='The data will be display here'">
+                {{mv.dataFromServer}}
+            </code>
+            <p>
+                <textarea rows="15" cols="40"
+                          ng-init="mv.dataToServer=mv.placeholder"
+                          ng-model="mv.dataToServer"
+                          ng-click="mv.dataToServer=''"
+                          ng-blur="mv.dataToServer=mv.placeholder"
+                          ng-paste="mv.whenPaste='You paste it!'"
+                          ng-keypress="mv.whenPaste=''"
+                          ng-mouseleave="mv.whenPaste=''"></textarea>
+                <em>
+                    {{mv.whenPaste}}
+                </em>
+            </p>
+            <p>
+                <input type="button" ng-click="mv.getSData()" value="GET"> - Click to get data from the Server
+            </p>
+            <p>
+                <input type="button" ng-click="mv.appendSData()" value="APPEND"> - Click to append data to the Server
+            </p>
+            <p>
+                <input type="button" ng-click="mv.rewriteSData()" value="REWRITE"> - Click to rewrite data on the Server
+            </p>
+            <p>
+                <input type="button" ng-click="mv.deleteSData()" value="DELETE"> - Click to delete data from the Server
+            </p>
+            <p>
+                <input type="button" ng-click="mv.deleteLatestSData()" value="DELETE LATEST"> - Click to delete latest data from the Server
+            </p>
+        </div>
+
+
+        <script src="../bower_components/angular/angular.js"></script>
+        <script src="../js/ng-modules/app.module.js"></script>
+        <script src="../js/ng-modules/getDataSFactory.js"></script>
+        <script src="../js/ng-modules/appendSDataFactory.js"></script>
+        <script src="../js/ng-modules/deleteSDataFactory.js"></script>
+        <script src="../js/ng-modules/dataLoadController.js"></script>
+    </body>
+</html>

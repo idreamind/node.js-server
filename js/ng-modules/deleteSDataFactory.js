@@ -1,6 +1,6 @@
 
 angular
-    .module('server')
+    .module('GymGoal')
     .factory('deleteSDataService', deleteSDataService);
 
 deleteSDataService.$inject = ['$http'];

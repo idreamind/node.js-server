@@ -3,7 +3,7 @@
  */
 
 angular
-    .module('server')
+    .module('GymGoal')
     .factory('appendSDataService', appendSDataService);
 
 appendSDataService.$inject = ['$http'];

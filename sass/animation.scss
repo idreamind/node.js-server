@@ -1,0 +1,26 @@
+// Colors:   -----------------------------------------------------------------|
+$BLUE: #00CCFF;
+
+// Functions:   --------------------------------------------------------------|
+@mixin setTransition( $T1, $T2: ease-in-out, $T3: ease-in-out,
+                      $T4: ease-in-out, $T5: ease-in-out, $T6: ease-in-out ) {
+  transition: $T1, $T2, $T3, $T4, $T5, $T6;
+  -o-transition: $T1, $T2, $T3, $T4, $T5, $T6;
+  -moz-transition: $T1, $T2, $T3, $T4, $T5, $T6;
+  -webkit-transition: $T1, $T2, $T3, $T4, $T5, $T6;
+}
+
+// Code 1:   -----------------------------------------------------------------|
+.animate-hide {
+  @include setTransition(all ease-in-out 0.5s);
+  opacity: 1;
+  background: lighten($BLUE, 10%);
+  padding: 10px 0;
+  &.ng-hide {
+    opacity: 0;
+    background: $BLUE;
+    padding: 0;
+  }
+}
+
+// Code 2:   -----------------------------------------------------------------|

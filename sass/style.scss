@@ -1,0 +1,229 @@
+
+// Rewrite tags:   -----------------------------------------------------------|
+html, body {
+  height: 100%;
+  width: 100%;
+  background: white;
+  overflow: hidden;
+}
+// Colors:   -----------------------------------------------------------------|
+$WHITE: #FFF;
+$WHITE_GRAY: #F6F6F6;
+$LIGHT_GRAY: #EEE;
+$DARK_GRAY: #777;
+$GREY: #CCC;
+$LIGHT_BLACK: #555;
+$BLUE: #00CCFF;
+
+// Function:   ---------------------------------------------------------------|
+@mixin setTransition( $T1, $T2: ease-in-out, $T3: ease-in-out,
+$T4: ease-in-out, $T5: ease-in-out, $T6: ease-in-out ) {
+  transition: $T1, $T2, $T3, $T4, $T5, $T6;
+  -o-transition: $T1, $T2, $T3, $T4, $T5, $T6;
+  -moz-transition: $T1, $T2, $T3, $T4, $T5, $T6;
+  -webkit-transition: $T1, $T2, $T3, $T4, $T5, $T6;
+}
+
+@mixin setBorderRadius( $R: 10px ) {
+  -webkit-border-radius: $R;
+  -moz-border-radius: $R;
+  border-radius: $R;
+}
+
+@mixin setRectWHXY( $W: 100%, $H: 100%, $X: 0%, $Y: 0% ) {
+  width: $W; height: $H;
+  left: $X;  top: $Y;
+}
+
+@mixin centreted( $W: 80%, $H: auto, $T: 100px  ) {
+  display: block;
+  position: relative;
+  width: $W; height: $H;
+  margin: auto;
+  top: $T;
+}
+
+@mixin boxShadow( $R: 20px, $A: 0.75 ) {
+  box-shadow: 0 0 $R rgba(0,0,0,$A);
+}
+
+// Id:   ---------------------------------------------------------------------|
+#main {
+  @include setBorderRadius( 8px );
+  @include centreted();
+  @include boxShadow();
+  background: $BLUE;
+  padding-bottom: 30px;
+}
+
+#plot-view {
+  width: 100%;
+  padding: 10px 0px;
+  color: $WHITE;
+}
+
+#plot-view-svg {
+  @include setBorderRadius(5px);
+  @include centreted(90%, auto, 10px);
+  height: 500px;
+  border: 3px solid white;
+
+}
+
+#plot-settings, #plot-layout {
+  @include centreted(100%, auto, 0px);
+  @include boxShadow(5px, 0.5);
+  background: lighten($BLUE, 10%);
+}
+
+#plot-layout {
+  @include boxShadow( 10px, 0.5 );
+  background: lighten($BLUE, 20%);
+  padding-bottom: 70px;
+}
+
+// Classes:   ----------------------------------------------------------------|
+.plot-data {
+  @include centreted(90%, 25px, 5px);
+  border: none;
+  border-left: 5px solid white;
+  border-right: 5px solid white;
+  font-size: 14pt;
+  color: $BLUE;
+}
+
+.plot-data-small {
+  text-align: center;
+  font-size: 14pt;
+  color: $BLUE;
+  width: 120px;
+  height: 25px;
+  border: none;
+}
+
+.data-line {
+  @include centreted(calc(90% + 10px), auto, 0px);
+  padding: 10px 0;
+  display: block;
+}
+
+.h-range-data, .v-range-data {
+  position: absolute;
+  left: 5%; top: 550px;
+  width: 250px;
+}
+
+.v-range-data {
+  -webkit-appearance: slider-vertical;
+  height: 200px;
+  left: -105px;
+  top: 300px;
+}
+
+.data-label-h, .data-label-v {
+  @include setBorderRadius(5px);
+  position: absolute;
+  width: 36px;
+  height: 20px;
+  top: 520px;
+  color: white;
+  box-shadow: 0 0 3px rgba(0,0,0,0.6);
+  text-align: center;
+  padding: 3px 0;
+}
+
+.data-label-v {
+  position: absolute;
+  top: auto;
+  left: 35px;
+}
+
+
+.goal-label {
+  fill: white;
+  font-weight: normal;
+  cursor: pointer;
+  &:hover, &:active, &:focus {
+    font-weight: bold;
+  }
+}
+
+// Plot-lines:   -------------------------------------------------------------|
+.plot-line-white, .plot-line-magenta, .plot-line-yellow {
+  stroke: white;
+  stroke-width: 2px;
+  fill: rgba(255,255,255,0.25);
+  &:hover, &:active, &:focus {
+    stroke: #00ff00;
+  }
+}
+
+.plot-line-magenta {
+  stroke: magenta;
+  fill: rgba(0,0,255,0.25);
+}
+
+.plot-line-yellow {
+  stroke: yellow;
+  fill: rgba(255,255,0,0.25);
+}
+
+// Plot-points:   ------------------------------------------------------------|
+.plot-point, .plot-point-mass, .plot-point-force {
+  stroke-width: 3px;
+  stroke: white;
+  fill: rgba(33,33,255,0.25);
+  &:hover, &:active, &:focus {
+    fill: rgba(33,33,255,0.75);;
+  }
+}
+
+.plot-point-mass {
+  stroke: chartreuse;
+  fill: rgba(33, 255, 33, 0.25);
+  &:hover, &:active, &:focus {
+    fill: rgba(33, 255, 33, 0.75);;
+  }
+}
+
+.plot-point-force {
+  stroke: crimson;
+  fill: rgba(255, 33, 255, 0.25);
+  &:hover, &:active, &:focus {
+    fill: rgba(255, 33, 255, 0.75);;
+  }
+}
+
+// Additional CSS:   ---------------------------------------------------------|
+.input-error {
+  border: 4px solid crimson;
+}
+
+.v-grid {
+  stroke-width: 1px;
+  stroke: rgba(255,255,255,0.5);
+}
+
+.buttons, .buttons-long {
+  width: 100px;
+  color: $BLUE;
+  font-weight: bold;
+}
+
+.buttons-long {
+  width: 200px;
+  left: 5%;
+}
+
+.special-buttons {
+  @include setTransition(all ease-in-out 0.333s);
+  margin: 0 0 0 10px;
+  position: relative;
+  color: lighten( $BLUE, 10% );
+  float: right;
+  width: 150px;
+  &:hover, &:focus, &:active {
+    color: darken( $BLUE, 10% );
+    width: 165px;
+  }
+}

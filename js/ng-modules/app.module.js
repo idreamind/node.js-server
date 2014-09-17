@@ -2,4 +2,4 @@
  * Created by dreamind on 11.09.2014.
  */
 angular
-    .module('server',[]);
+    .module('GymGoal', ['ngAnimate']);

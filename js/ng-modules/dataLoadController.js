@@ -3,7 +3,7 @@
  */
 
 angular
-    .module('server')
+    .module('GymGoal')
     .controller('dataLoadController', dataLoadController);
 
 dataLoadController.$inject = ['getSDataService', 'appendSDataService', 'deleteSDataService'];
