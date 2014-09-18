@@ -24,12 +24,20 @@ function plotDataCtrl($window, dataLoadService) {
     mv.stepWatcher = stepWatcher;
     mv.verticalWatcher = verticalWatcher;
     mv.toggle = toggle;
+    mv.setDataFromServer = setDataFromServer;
+    mv.saveDataToServer = saveDataToServer;
+    mv.deleteLatestData = deleteLatestData;
+    mv.deleteAllData = deleteAllData;
+
+/*--------------------------------------------------------------------------------------------------------------------*/
 
     mv.step = 50;
     mv.hmax = 200;
     mv.elem = document.getElementById("plot-view-svg");
     mv.svgHeight = parseFloat($window.getComputedStyle(mv.elem, null).height);
     mv.svgWidth = parseFloat($window.getComputedStyle(mv.elem, null).width);
+
+/*--------------------------------------------------------------------------------------------------------------------*/
 
     // Scaling data in array in according with the View | mv
     function rewriteArray(arr) {
@@ -46,6 +54,8 @@ function plotDataCtrl($window, dataLoadService) {
         return outArr;
     }
 
+/*--------------------------------------------------------------------------------------------------------------------*/
+
     // Build the steps array | mv
     function stepArr(step_, length) {
         var steps = [];
@@ -54,6 +64,8 @@ function plotDataCtrl($window, dataLoadService) {
         }
         return steps;
     }
+
+/*--------------------------------------------------------------------------------------------------------------------*/
 
     // Build the points array for the svg-view | mv
     function prepareData(arr1, arr2) {
@@ -74,6 +86,8 @@ function plotDataCtrl($window, dataLoadService) {
         return arr_;
     }
 
+/*--------------------------------------------------------------------------------------------------------------------*/
+
     // The validation function | mv
     function numberValidation(str, arg) {
         var reg1 = /[^0-9, ^\s, ^., ^,]/ig,
@@ -89,12 +103,16 @@ function plotDataCtrl($window, dataLoadService) {
         return mstr.replace(reg3, ".");
     }
 
+/*--------------------------------------------------------------------------------------------------------------------*/
+
     // The goal-point management | mv
     function goalPoint(goal, date) {
         var correctGoal = mv.svgHeight - goal / mv.hmax * 100
         var correctDate = date * mv.step;
         return [ correctGoal, correctDate ];
     }
+
+/*--------------------------------------------------------------------------------------------------------------------*/
 
     // The Grid Array Builder | mv
     function gridArrBuilder() {
@@ -106,26 +124,30 @@ function plotDataCtrl($window, dataLoadService) {
         return gridArr;
     }
 
+/*--------------------------------------------------------------------------------------------------------------------*/
+
     // The wrapper for the validation function | mv
     function validation(arg) {
         mv.inputData[arg] = mv.numberValidation(mv.inputData[arg], arg);
     }
 
+/*--------------------------------------------------------------------------------------------------------------------*/
+
     // The input initialization method | mv
     function inputInitialization() {
         mv.vGridArr = mv.gridArrBuilder();
-
-        var data_ = dataLoadService.getSData();                    //*********************************************
-        console.log( "********* Data from:" + data_ );                //*********************************************
-
+        mv.setDataFromServer();
+        
         return initData = {
-            "weight": "0 50  200 56 80  0 128 111 0",
-            "fat": "0 98  360 10 175 0 12  80  0",
-            "water": "0 123 64  98 46  0 48  97  0",
+            "weight": "",
+            "fat": "",
+            "water": "",
             "goal": "75",
             "when": "10"
         };
     };
+
+/*--------------------------------------------------------------------------------------------------------------------*/
 
     // Goal point handler | mv
     function handleGoalPoin() {
@@ -133,6 +155,8 @@ function plotDataCtrl($window, dataLoadService) {
         mv['goal'] = goal_[ 0 ];
         mv['when'] = goal_[ 1 ];
     }
+
+/*--------------------------------------------------------------------------------------------------------------------*/
 
     // The SVG initialization method | mv
     function svgInitialization() {
@@ -143,12 +167,13 @@ function plotDataCtrl($window, dataLoadService) {
             var stepsArray = mv.stepArr(mv.step, preArg.length);
 
             mv[ key ] = mv.prepareData(preArg, stepsArray);
-        }
-        ;
+        };
         mv.handleGoalPoin();
         mv.goalClass = 'plot-point';
         mv.showclick = 'true';  ///< True and the div will be hide
     };
+
+/*--------------------------------------------------------------------------------------------------------------------*/
 
     // The plot and input data binding method | mv
     function changePlotData(arg) {
@@ -160,6 +185,8 @@ function plotDataCtrl($window, dataLoadService) {
         mv.handleGoalPoin();
     };
 
+/*--------------------------------------------------------------------------------------------------------------------*/
+
     // The horizontal plot step watcher | mv
     function stepWatcher() {
         mv.step = mv.settingsData.h_range;
@@ -170,11 +197,15 @@ function plotDataCtrl($window, dataLoadService) {
         mv.handleGoalPoin()
     }
 
+/*--------------------------------------------------------------------------------------------------------------------*/
+
     // The vertical step plot watcher | mv
     function verticalWatcher() {
         mv.hmax = 250 - mv.settingsData.v_range;
         mv.stepWatcher();
     }
+
+/*--------------------------------------------------------------------------------------------------------------------*/
 
     // Toggle "arg", where "arg" - any ng-model | mv
     function toggle(arg) {
@@ -184,4 +215,68 @@ function plotDataCtrl($window, dataLoadService) {
             mv[arg] = true;
         }
     }
+
+/*--------------------------------------------------------------------------------------------------------------------*/
+
+    // Load data from Server | mv
+    function setDataFromServer() {
+        dataLoadService.getSData()
+            .then(function(dataFrom) {
+                mv.inputData.weight = dataFrom.weight.replace(/,/g, " ");
+                mv.inputData.fat = dataFrom.fat.replace(/,/g, " ");
+                mv.inputData.water = dataFrom.water.replace(/,/g, " ");
+                // Data-processing for viewer:
+                mv.changePlotData('weight');
+                mv.changePlotData('fat');
+                mv.changePlotData('water');
+            });
+    }
+
+/*--------------------------------------------------------------------------------------------------------------------*/
+
+    function saveDataToServer() {
+        var dataToServer = {
+            days: "",
+            weight: mv.inputData.weight,
+            fat: mv.inputData.fat,
+            water: mv.inputData.water
+        };
+
+        // And server-controller:
+        dataLoadService.rewriteSData( dataToServer )
+            .then(function(dataFrom) {
+                mv.inputData.weight = dataFrom.weight.replace(/,/g, " ");
+                mv.inputData.fat = dataFrom.fat.replace(/,/g, " ");
+                mv.inputData.water = dataFrom.water.replace(/,/g, " ");
+                // Data-processing for viewer:
+                mv.changePlotData('weight');
+                mv.changePlotData('fat');
+                mv.changePlotData('water');
+            });
+    }
+
+/*--------------------------------------------------------------------------------------------------------------------*/
+
+    function deleteLatestData() {
+        dataLoadService.deleteLatestSData()
+            .then(function(dataFrom) {
+                mv.inputData.weight = dataFrom.weight.replace(/,/g, " ");
+                mv.inputData.fat = dataFrom.fat.replace(/,/g, " ");
+                mv.inputData.water = dataFrom.water.replace(/,/g, " ");
+                // Data-processing for viewer:
+                mv.changePlotData('weight');
+                mv.changePlotData('fat');
+                mv.changePlotData('water');
+            });
+    }
+
+/*--------------------------------------------------------------------------------------------------------------------*/
+
+    function deleteAllData() {
+        dataLoadService.deleteSData()
+            .then(function(dataFrom) {
+                mv.setDataFromServer();
+            });
+    }
+
 };

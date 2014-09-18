@@ -37,26 +37,31 @@
                         <input type="button" value="mass" ng-click="mv.goalClass='plot-point-mass'" class="buttons">
                         <input type="button" value="force" ng-click="mv.goalClass='plot-point-force'" class="buttons">
                         <input type="button" value="Delete all{{mv.hoverDelAll}}"
-                               ng-click=""
+                               ng-click="mv.deleteAllData()"
                                ng-mouseover="mv.hoverDelAll='. Dangerous!'"
                                ng-mouseleave="mv.hoverDelAll=''"
                                class="buttons special-buttons">
                         <input type="button" value="Delete latest {{mv.hoverDelLat}}"
-                               ng-click=""
+                               ng-click="mv.deleteLatestData()"
                                ng-mouseover="mv.hoverDelLat='only'"
                                ng-mouseleave="mv.hoverDelLat=''"
                                class="buttons special-buttons">
                         <input type="button" value="Save {{mv.hoverSave}}"
-                               ng-click=""
+                               ng-click="mv.saveDataToServer()"
                                ng-mouseover="mv.hoverSave=', YES? '"
                                ng-mouseleave="mv.hoverSave=''"
+                               class="buttons special-buttons">
+                        <input type="button" value="Renew {{mv.hoverRe}}"
+                               ng-click="mv.setDataFromServer()"
+                               ng-mouseover="mv.hoverRe='all data'"
+                               ng-mouseleave="mv.hoverRe=''"
                                class="buttons special-buttons">
                     </div>
                 </div>
 
                 <div id="plot-layout">
                     <svg id="plot-view-svg" ng-init="mv.svgInitialization()">
-                        <line ng-repeat="vGrid in mv.vGridArr" x1="{{vGrid * step}}" y1="0" x2="{{vGrid * step}}" y2="1000" class="v-grid"></line>
+                        <line ng-repeat="vGrid in mv.vGridArr" x1="{{vGrid * mv.step}}" y1="0" x2="{{vGrid * mv.step}}" y2="1000" class="v-grid"></line>
                         <polyline points="{{ mv.weight }}" class="plot-line-white"></polyline>
                         <polyline points="{{ mv.fat }}" class="plot-line-magenta"></polyline>
                         <polyline points="{{ mv.water }}" class="plot-line-yellow"></polyline>

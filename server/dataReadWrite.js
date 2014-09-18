@@ -5,14 +5,13 @@
 var fs = require("fs"),
     colors = require("./../node_modules/colors/colors.js");
 
+// Append a new data to the end of the JSON-object
 function appendData( response, newData ) {
 
     var setData = "none",
         getData = "none",
         stringEnd = ", ";
 
-    // Yes! Two times!!!
-    newData = JSON.parse( newData );
     newData = JSON.parse( newData );
 
     fs.readFile("data/data.json", function( error, data ) {
@@ -38,19 +37,21 @@ function appendData( response, newData ) {
                 response.errors += error;
             });
 
+            var dataToSend = JSON.stringify(getData);
+
             response.writeHead(200, { "Content-type": "text/plain" });
-            response.write("You've sent: '" + getData + "' ");
+            response.write( dataToSend );
             response.end();
         }
     });
 }
 
+// Rewrite a new data to the JSON-object
 function rewriteData( response,  newData ) {
 
     var stringEnd = ", ";
 
     // Yes! Two times!!!
-    newData = JSON.parse( newData );
     newData = JSON.parse( newData );
 
     newData.days = newData.days.concat( stringEnd );
@@ -64,11 +65,14 @@ function rewriteData( response,  newData ) {
         response.errors += error;
     });
 
+    var dataToSend = JSON.stringify(newData);
+
     response.writeHead(200, { "Content-type": "text/plain" });
-    response.write("You've sent: '" + newData + "' ");
+    response.write( dataToSend );
     response.end();
 }
 
+// Read a data from the JSON-object
 function readData( response ) {
 
     var getData = "none";
@@ -83,8 +87,10 @@ function readData( response ) {
             getData.fat = getData.fat.slice(0, -2);
             getData.water = getData.water.slice(0, -2);
 
+            var dataToSend = JSON.stringify(getData);
+
             response.writeHead(200, { "Content-type": "text/plain" });
-            response.write("You've sent: '" + getData + "' ");
+            response.write( dataToSend );
             response.end();
         }
     });
@@ -100,9 +106,10 @@ function deleteAll( response ) {
     });
 
     setData = JSON.parse( newData );
+    var dataToSend = JSON.stringify(setData);
 
     response.writeHead(200, { "Content-type": "text/plain" });
-    response.write("You've sent: '" + setData + "' ");
+    response.write( dataToSend );
     response.end();
 }
 
@@ -127,23 +134,23 @@ function deleteLatest( response ) {
             getData = setData;
             setData = JSON.stringify( setData );
 
-            fs.writeFile("data/data.json", setData, {flag: 'w'}, function( error ) {
-                response.errors += error;
-            });
+//            fs.writeFile("data/data.json", setData, {flag: 'w'}, function( error ) {
+//                response.errors += error;
+//            });
+
+            var dataToSend = JSON.stringify(getData);
 
             response.writeHead(200, { "Content-type": "text/plain" });
-            response.write("You've sent: '" + getData + "' ");
+            response.write( dataToSend );
             response.end();
         }
     });
 
     function handleObj( obj, end ) {
         var object = obj;
-        object = object.replace(regExp, "");
-        object = object.split(",");
+        object = object.split(" ");
         object.pop();
         object.pop();
-        object.join( end );
         return object + end;
     }
 }

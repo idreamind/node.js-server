@@ -16,70 +16,60 @@ function dataLoadService(getSDataService, appendSDataService, deleteSDataService
         deleteLatestSData: deleteLatestSData
     };
 
-    var dataFromServer = 'Nothing to display';
+    var errorData = "Nothing to display after the request...";
 
     function getSData() {
-        var data_ = getSDataService.getData()
+        return getSDataService.getData()
             .then(function (data) {
                 if (data) {
-                    dataFromServer = data;
+                    return data;
                 } else {
-                    dataFromServer = "Nothing to display after the getData";
+                    return errorData;
                 }
-                return dataFromServer;
             });
-        return data_;
     }
 
-    function appendSData() {
-        var data_ = appendSDataService.appendData(dataToServer)
+    function appendSData( dataToServer ) {
+        return appendSDataService.appendData( dataToServer )
             .then(function (data) {
                 if (data) {
-                    dataFromServer = data;
+                    return data;
                 } else {
-                    dataFromServer = "Nothing to display after the appendData";
+                    return errorData;
                 }
-                return dataFromServer;
             });
-        return data_;
     }
 
-    function rewriteSData() {
-        var data_ = appendSDataService.rewriteData(dataToServer)
+    function rewriteSData( dataToServer ) {
+        return appendSDataService.rewriteData( dataToServer )
             .then(function (data) {
                 if (data) {
-                    dataFromServer = data;
+                    return data;
                 } else {
-                    dataFromServer = "Nothing to display after the rewriteData";
+                    return errorData;
                 }
-                return dataFromServer;
             });
-        return data_;
     }
 
     function deleteSData() {
-        var data_ = deleteSDataService.deleteAll()
+        return deleteSDataService.deleteAll()
             .then(function (data) {
                 if (data) {
-                    dataFromServer = data;
+                    return data;
                 } else {
-                    dataFromServer = "Nothing to display after the deleteAll";
+                    return errorData;
                 }
-                return dataFromServer;
             });
-        return data_;
     }
 
     function deleteLatestSData() {
-        var data_ = deleteSDataService.deleteLatest()
+        return deleteSDataService.deleteLatest()
             .then(function (data) {
                 if (data) {
-                    dataFromServer = data;
+                    return data;
                 } else {
-                    dataFromServer = "Nothing to display after the deleteLatest";
+                    return errorData;
                 }
-                return dataFromServer;
             });
-        return data_;
     }
 }
