@@ -137,7 +137,7 @@ function plotDataCtrl($window, dataLoadService) {
     function inputInitialization() {
         mv.vGridArr = mv.gridArrBuilder();
         mv.setDataFromServer();
-        
+
         return initData = {
             "weight": "",
             "fat": "",
@@ -257,6 +257,7 @@ function plotDataCtrl($window, dataLoadService) {
 
 /*--------------------------------------------------------------------------------------------------------------------*/
 
+    // Delete last append data, if it was changing in this time
     function deleteLatestData() {
         dataLoadService.deleteLatestSData()
             .then(function(dataFrom) {
@@ -272,6 +273,7 @@ function plotDataCtrl($window, dataLoadService) {
 
 /*--------------------------------------------------------------------------------------------------------------------*/
 
+    // Delete all available data
     function deleteAllData() {
         dataLoadService.deleteSData()
             .then(function(dataFrom) {
