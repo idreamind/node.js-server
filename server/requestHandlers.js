@@ -22,8 +22,22 @@ function start( response, request, pathName, postData ) {
     });
 }
 
-function css( response, request, pathName, postData ) {
+function img( response, request, pathName, postData ) {
+    var correctPath = pathName.substring(1);
+    fs.readFile(correctPath, function( error, data ) {
+        if( error ) {
+            response.writeHead(200, { "Content-type": "text/html" });
+            response.write( "<h1>404 Requested IMG not Found</h1><h2>Error: " + error + "</h2>" );
+            response.end();
+        } else {
+            response.writeHead(200, { "Content-type": "image/png" });
+            response.write( data );
+            response.end();
+        }
+    });
+}
 
+function css( response, request, pathName, postData ) {
     var correctPath = pathName.substring(1);
     fs.readFile(correctPath, function( error, data ) {
         if( error ) {
@@ -39,7 +53,6 @@ function css( response, request, pathName, postData ) {
 }
 
 function js( response, request, pathName, postData ) {
-
     var correctPath = pathName.substring(1);
     fs.readFile(correctPath, function( error, data ) {
         if( error ) {
@@ -81,6 +94,7 @@ function server( response, request, pathName, postData ) {
 }
 
 exports.start  = start;
+exports.img    = img;
 exports.css    = css;
 exports.js     = js;
 exports.server = server;

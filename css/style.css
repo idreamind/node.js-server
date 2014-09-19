@@ -51,6 +51,14 @@ html, body {
   background: #66e0ff;
   padding-bottom: 70px; }
 
+#img-back {
+  position: absolute;
+  display: block;
+  top: -10%;
+  left: -10%;
+  width: 120%;
+  height: auto; }
+
 .plot-data {
   display: block;
   position: relative;

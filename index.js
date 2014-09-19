@@ -9,6 +9,10 @@ var server = require("./server/server"),
 
 var handler = {};
 handler["/"] = requestHandlers.start;
+
+// img:
+handler["/image/gym-hop.png"] = requestHandlers.img;
+
 // css:
 handler["/css/style.css"] = requestHandlers.css;
 handler["/css/animation.css"] = requestHandlers.css;

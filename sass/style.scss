@@ -82,6 +82,15 @@ $T4: ease-in-out, $T5: ease-in-out, $T6: ease-in-out ) {
   padding-bottom: 70px;
 }
 
+#img-back {
+  position: absolute;
+  display: block;
+  top: -10%;
+  left: -10%;
+  width: 120%;
+  height: auto;
+}
+
 // Classes:   ----------------------------------------------------------------|
 .plot-data {
   @include centreted(90%, 25px, 5px);
