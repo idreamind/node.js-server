@@ -161,6 +161,7 @@ html, body {
   stroke: rgba(255, 255, 255, 0.5); }
 
 .buttons, .buttons-long {
+  height: 30px;
   width: 100px;
   color: #00ccff;
   font-weight: bold; }
@@ -169,16 +170,29 @@ html, body {
   width: 200px;
   left: 5%; }
 
-.special-buttons {
+.special-buttons, .alert-special-buttons {
   transition: all ease-in-out 0.333s, ease-in-out, ease-in-out, ease-in-out, ease-in-out, ease-in-out;
   -o-transition: all ease-in-out 0.333s, ease-in-out, ease-in-out, ease-in-out, ease-in-out, ease-in-out;
   -moz-transition: all ease-in-out 0.333s, ease-in-out, ease-in-out, ease-in-out, ease-in-out, ease-in-out;
   -webkit-transition: all ease-in-out 0.333s, ease-in-out, ease-in-out, ease-in-out, ease-in-out, ease-in-out;
+  height: 30px;
   margin: 0 0 0 10px;
   position: relative;
   color: #33d6ff;
   float: right;
   width: 150px; }
-  .special-buttons:hover, .special-buttons:focus, .special-buttons:active {
+  .special-buttons:hover, .special-buttons:focus, .special-buttons:active, .alert-special-buttons:hover, .alert-special-buttons:focus, .alert-special-buttons:active {
     color: #00a3cc;
+    width: 165px; }
+
+.alert-special-buttons {
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  border-color: white !important;
+  color: white !important;
+  background: crimson; }
+  .alert-special-buttons:hover, .alert-special-buttons:focus, .alert-special-buttons:active {
+    color: #e6e6e6 !important;
+    height: 40px;
     width: 165px; }

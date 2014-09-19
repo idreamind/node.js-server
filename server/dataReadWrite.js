@@ -54,10 +54,19 @@ function rewriteData( response,  newData ) {
     // Yes! Two times!!!
     newData = JSON.parse( newData );
 
+    console.log( "when goal 1: " + newData.when );
+
     newData.days = newData.days.concat( stringEnd );
     newData.weight = newData.weight.concat( stringEnd );
     newData.fat = newData.fat.concat( stringEnd );
     newData.water = newData.water.concat( stringEnd );
+//    newData.goal = newData.goal.toString();
+//    newData.goal = newData.goal.concat( stringEnd );
+//    newData.when = newData.when.toString();
+//    newData.when = newData.when.concat( stringEnd );
+
+    console.log( "else data: " + newData.water );
+    console.log( "when goal 2: " + newData.when );
 
     setData = JSON.stringify( newData );
 
@@ -134,9 +143,9 @@ function deleteLatest( response ) {
             getData = setData;
             setData = JSON.stringify( setData );
 
-//            fs.writeFile("data/data.json", setData, {flag: 'w'}, function( error ) {
-//                response.errors += error;
-//            });
+            fs.writeFile("data/data.json", setData, {flag: 'w'}, function( error ) {
+                response.errors += error;
+            });
 
             var dataToSend = JSON.stringify(getData);
 
@@ -149,9 +158,14 @@ function deleteLatest( response ) {
     function handleObj( obj, end ) {
         var object = obj;
         object = object.split(" ");
-        object.pop();
-        object.pop();
-        return object + end;
+        // It to delete only last changed dara
+        if( object.length > 2 ) {
+            object.pop();
+            object.pop();
+            return object + end;
+        } else {
+            return obj;
+        }
     }
 }
 

@@ -28,6 +28,7 @@ function plotDataCtrl($window, dataLoadService) {
     mv.saveDataToServer = saveDataToServer;
     mv.deleteLatestData = deleteLatestData;
     mv.deleteAllData = deleteAllData;
+    mv.hoverDelAllBack = hoverDelAllBack;
 
 /*--------------------------------------------------------------------------------------------------------------------*/
 
@@ -225,6 +226,8 @@ function plotDataCtrl($window, dataLoadService) {
                 mv.inputData.weight = dataFrom.weight.replace(/,/g, " ");
                 mv.inputData.fat = dataFrom.fat.replace(/,/g, " ");
                 mv.inputData.water = dataFrom.water.replace(/,/g, " ");
+                mv.inputData.goal = dataFrom.goal;
+                mv.inputData.when = dataFrom.when;
                 // Data-processing for viewer:
                 mv.changePlotData('weight');
                 mv.changePlotData('fat');
@@ -239,7 +242,9 @@ function plotDataCtrl($window, dataLoadService) {
             days: "",
             weight: mv.inputData.weight,
             fat: mv.inputData.fat,
-            water: mv.inputData.water
+            water: mv.inputData.water,
+            goal: mv.inputData.goal,
+            when: mv.inputData.when
         };
 
         // And server-controller:
@@ -248,6 +253,8 @@ function plotDataCtrl($window, dataLoadService) {
                 mv.inputData.weight = dataFrom.weight.replace(/,/g, " ");
                 mv.inputData.fat = dataFrom.fat.replace(/,/g, " ");
                 mv.inputData.water = dataFrom.water.replace(/,/g, " ");
+                mv.inputData.goal = dataFrom.goal;
+                mv.inputData.when = dataFrom.when;
                 // Data-processing for viewer:
                 mv.changePlotData('weight');
                 mv.changePlotData('fat');
@@ -264,6 +271,8 @@ function plotDataCtrl($window, dataLoadService) {
                 mv.inputData.weight = dataFrom.weight.replace(/,/g, " ");
                 mv.inputData.fat = dataFrom.fat.replace(/,/g, " ");
                 mv.inputData.water = dataFrom.water.replace(/,/g, " ");
+                mv.inputData.goal = dataFrom.goal;
+                mv.inputData.when = dataFrom.when;
                 // Data-processing for viewer:
                 mv.changePlotData('weight');
                 mv.changePlotData('fat');
@@ -274,11 +283,27 @@ function plotDataCtrl($window, dataLoadService) {
 /*--------------------------------------------------------------------------------------------------------------------*/
 
     // Delete all available data
+    var counter = 0;
     function deleteAllData() {
-        dataLoadService.deleteSData()
-            .then(function(dataFrom) {
-                mv.setDataFromServer();
-            });
+        if (counter < 1) {
+            mv.classes.buttonAler = "buttons special-buttons alert-special-buttons";
+            mv.hoverDelAll = ". Уверен?"
+            counter = 1;
+        } else {
+            dataLoadService.deleteSData()
+                .then(function (dataFrom) {
+                    mv.setDataFromServer();
+                    mv.classes.buttonAler = "buttons special-buttons";
+                    mv.hoverDelAll = ". Удалено."
+                });
+            counter = 0;
+        }
+    }
+
+    function hoverDelAllBack() {
+        counter = 0;
+        mv.classes.buttonAler = "buttons special-buttons";
+        mv.hoverDelAll = "";
     }
 
 };

@@ -39,8 +39,9 @@
                         <input type="button" value="Delete all{{mv.hoverDelAll}}"
                                ng-click="mv.deleteAllData()"
                                ng-mouseover="mv.hoverDelAll='. Dangerous!'"
-                               ng-mouseleave="mv.hoverDelAll=''"
-                               class="buttons special-buttons">
+                               ng-mouseleave="mv.hoverDelAllBack()"
+                               ng-init="mv.classes.buttonAler='buttons special-buttons'"
+                               ng-class="mv.classes.buttonAler">
                         <input type="button" value="Delete latest {{mv.hoverDelLat}}"
                                ng-click="mv.deleteLatestData()"
                                ng-mouseover="mv.hoverDelLat='only'"
