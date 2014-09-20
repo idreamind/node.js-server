@@ -10,7 +10,10 @@
 
     <body ng-controller="plotDataCtrl as mv">
 
-        <img src="../image/gym-hop.png" id="img-back">
+        <!--<img src="../image/gym-hop.png" id="img-back">-->
+        <panoramic picture-src="../image/gym-hop.png" picture-width="50"
+                   set-x="{{mv.settingsData.h_range}}"
+                   set-y="{{mv.settingsData.v_range}}"></panoramic>
         <div id="main" ng-cloak>
             <div id="plot-view" ng-init="mv.inputData = mv.inputInitialization()">
 
@@ -99,6 +102,7 @@
         <script src="../js/ng-modules/appendSDataFactory.js"></script>
         <script src="../js/ng-modules/deleteSDataFactory.js"></script>
         <script src="../js/ng-modules/dataLoadFactory.js"></script>
+        <script src="../js/ng-directives/PanoramicPicture.js"></script>
         <script src="../js/ng-modules/plotDataCtrl.js"></script>
 
     </body>

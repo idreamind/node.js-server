@@ -29,6 +29,8 @@ handler["/js/ng-modules/appendSDataFactory.js"] = requestHandlers.js;
 handler["/js/ng-modules/deleteSDataFactory.js"] = requestHandlers.js;
 handler["/js/ng-modules/dataLoadFactory.js"] = requestHandlers.js;
 handler["/js/ng-modules/plotDataCtrl.js"] = requestHandlers.js;
+handler["/js/ng-directives/PanoramicPicture.js"] = requestHandlers.js;
+
 handler["/server"] = requestHandlers.server;
 
 server.start( router.route, handler );

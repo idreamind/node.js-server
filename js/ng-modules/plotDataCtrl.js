@@ -48,7 +48,7 @@ function plotDataCtrl($window, dataLoadService) {
         for (var i = 0; i < arr.length; i++) {
             var numb = parseFloat(arr[i]);
             if (!isNaN(numb)) {
-                outArr[iter] = mv.svgHeight - numb / mv.hmax * 100;
+                outArr[iter] = mv.svgHeight - numb / mv.hmax * 150;
                 iter = iter + 1;
             }
         }
