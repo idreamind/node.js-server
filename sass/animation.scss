@@ -24,3 +24,10 @@ $BLUE: #00CCFF;
 }
 
 // Code 2:   -----------------------------------------------------------------|
+.animate-hover {
+  @include setTransition(all ease-in-out 0.75s);
+  opacity: 0.6 !important;
+  &:hover {
+    opacity: 1 !important;
+  }
+}

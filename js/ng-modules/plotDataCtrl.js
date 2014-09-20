@@ -23,7 +23,6 @@ function plotDataCtrl($window, dataLoadService) {
     mv.changePlotData = changePlotData;
     mv.stepWatcher = stepWatcher;
     mv.verticalWatcher = verticalWatcher;
-    mv.toggle = toggle;
     mv.setDataFromServer = setDataFromServer;
     mv.saveDataToServer = saveDataToServer;
     mv.deleteLatestData = deleteLatestData;
@@ -34,6 +33,7 @@ function plotDataCtrl($window, dataLoadService) {
 
     mv.step = 50;
     mv.hmax = 200;
+    mv.koff = 800;
     mv.elem = document.getElementById("plot-view-svg");
     mv.svgHeight = parseFloat($window.getComputedStyle(mv.elem, null).height);
     mv.svgWidth = parseFloat($window.getComputedStyle(mv.elem, null).width);
@@ -48,7 +48,7 @@ function plotDataCtrl($window, dataLoadService) {
         for (var i = 0; i < arr.length; i++) {
             var numb = parseFloat(arr[i]);
             if (!isNaN(numb)) {
-                outArr[iter] = mv.svgHeight - numb / mv.hmax * 150;
+                outArr[iter] = mv.svgHeight - numb / mv.hmax * mv.koff;
                 iter = iter + 1;
             }
         }
@@ -108,7 +108,7 @@ function plotDataCtrl($window, dataLoadService) {
 
     // The goal-point management | mv
     function goalPoint(goal, date) {
-        var correctGoal = mv.svgHeight - goal / mv.hmax * 100
+        var correctGoal = mv.svgHeight - goal / mv.hmax * mv.koff
         var correctDate = date * mv.step;
         return [ correctGoal, correctDate ];
     }
@@ -204,17 +204,6 @@ function plotDataCtrl($window, dataLoadService) {
     function verticalWatcher() {
         mv.hmax = 250 - mv.settingsData.v_range;
         mv.stepWatcher();
-    }
-
-/*--------------------------------------------------------------------------------------------------------------------*/
-
-    // Toggle "arg", where "arg" - any ng-model | mv
-    function toggle(arg) {
-        if ( mv[arg]) {
-            mv[arg] = false;
-        } else {
-            mv[arg] = true;
-        }
     }
 
 /*--------------------------------------------------------------------------------------------------------------------*/

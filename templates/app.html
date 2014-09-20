@@ -14,11 +14,11 @@
         <panoramic picture-src="../image/gym-hop.png" picture-width="50"
                    set-x="{{mv.settingsData.h_range}}"
                    set-y="{{mv.settingsData.v_range}}"></panoramic>
-        <div id="main" ng-cloak>
+        <div id="main" ng-cloak class="animate-hover">
             <div id="plot-view" ng-init="mv.inputData = mv.inputInitialization()">
 
                 <div class="data-line">
-                    <input type="button" value="watch settings: {{mv.showclick}}" class="buttons-long" ng-click="mv.toggle('showclick')">
+                    <input type="button" value="watch settings: {{mv.showclick}}" class="buttons-long" ng-click="mv.showclick = !mv.showclick">
                 </div>
                 <div id="plot-settings" ng-Hide="mv.showclick" class="animate-hide">
                     <input type="text" ng-model="mv.inputData.weight"
@@ -103,6 +103,7 @@
         <script src="../js/ng-modules/deleteSDataFactory.js"></script>
         <script src="../js/ng-modules/dataLoadFactory.js"></script>
         <script src="../js/ng-directives/PanoramicPicture.js"></script>
+        <script src="../js/ng-directives/Toggle.js"></script>
         <script src="../js/ng-modules/plotDataCtrl.js"></script>
 
     </body>
