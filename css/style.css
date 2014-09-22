@@ -204,3 +204,43 @@ html, body {
     color: #e6e6e6 !important;
     height: 40px;
     width: 165px; }
+
+#user-panel {
+  border: none;
+  margin: 0px;
+  padding: 0px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.75);
+  width: 100%;
+  height: 60px;
+  left: 0%;
+  top: 0%;
+  position: absolute;
+  z-index: 1000 !important;
+  background: rgba(102, 224, 255, 0.85); }
+  #user-panel h1 {
+    width: 400px;
+    height: 60px;
+    left: calc(10% + 110px);
+    top: -110px;
+    display: block;
+    position: relative;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: white; }
+
+#user-img {
+  border: none;
+  margin: 0px;
+  padding: 0px;
+  width: 80px;
+  height: 110px;
+  left: 10%;
+  top: 0%;
+  position: relative; }
+  #user-img img {
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    border: 10px solid rgba(102, 224, 255, 0.85);
+    display: block;
+    height: 100%;
+    margin: auto; }

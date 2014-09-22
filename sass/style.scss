@@ -1,6 +1,6 @@
 
 // Rewrite tags:   -----------------------------------------------------------|
-html, body {
+html, body{
   height: 100%;
   width: 100%;
   background: white;
@@ -45,6 +45,12 @@ $T4: ease-in-out, $T5: ease-in-out, $T6: ease-in-out ) {
 
 @mixin boxShadow( $R: 20px, $A: 0.75 ) {
   box-shadow: 0 0 $R rgba(0,0,0,$A);
+}
+
+@mixin reset() {
+  border: none;
+  margin: 0px;
+  padding: 0px;
 }
 
 // Id:   ---------------------------------------------------------------------|
@@ -250,3 +256,35 @@ $T4: ease-in-out, $T5: ease-in-out, $T6: ease-in-out ) {
     width: 165px;
   }
 }
+
+// UserPanel CSS:   -----------------------------------------------------------|
+
+#user-panel {
+  @include reset();
+  @include boxShadow();
+  @include setRectWHXY(100%, 60px);
+  position: absolute;
+  z-index: 1000 !important;
+  background: rgba(102, 224, 255, 0.85);
+  h1 {
+    @include setRectWHXY(400px, 60px, calc(10% + 110px), -110px);
+    display: block;
+    position: relative;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: $WHITE;
+  }
+}
+
+#user-img {
+  @include reset();
+  @include setRectWHXY(80px, 110px, 10%);
+  position: relative;
+  img {
+    @include setBorderRadius(12px);
+    border: 10px solid rgba(102, 224, 255, 0.85);
+    display: block;
+    height: 100%;
+    margin: auto;
+  }
+}
+

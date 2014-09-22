@@ -12,6 +12,7 @@ handler["/"] = requestHandlers.start;
 
 // img:
 handler["/image/gym-hop.png"] = requestHandlers.img;
+handler["/image/iam.jpg"] = requestHandlers.img;
 
 // css:
 handler["/css/style.css"] = requestHandlers.css;
@@ -30,7 +31,8 @@ handler["/js/ng-modules/deleteSDataFactory.js"] = requestHandlers.js;
 handler["/js/ng-modules/dataLoadFactory.js"] = requestHandlers.js;
 handler["/js/ng-modules/plotDataCtrl.js"] = requestHandlers.js;
 handler["/js/ng-directives/PanoramicPicture.js"] = requestHandlers.js;
-handler["/js/ng-directives/Toggle.js"] = requestHandlers.js;
+handler["/js/ng-directives/Toggle.js"] = requestHandlers.js
+handler["/js/ng-directives/UserPanel.js"] = requestHandlers.js;
 
 handler["/server"] = requestHandlers.server;
 
