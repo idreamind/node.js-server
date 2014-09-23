@@ -1,21 +1,24 @@
 .animate-hide {
+  transition: all ease-in-out 0.3s, ease-in-out, ease-in-out, ease-in-out, ease-in-out, ease-in-out;
+  -o-transition: all ease-in-out 0.3s, ease-in-out, ease-in-out, ease-in-out, ease-in-out, ease-in-out;
+  -moz-transition: all ease-in-out 0.3s, ease-in-out, ease-in-out, ease-in-out, ease-in-out, ease-in-out;
+  -webkit-transition: all ease-in-out 0.3s, ease-in-out, ease-in-out, ease-in-out, ease-in-out, ease-in-out;
+  overflow: hidden;
+  opacity: 1;
+  background: #33d6ff;
+  padding: 10px 0;
+  height: 125px !important; }
+  .animate-hide.ng-hide {
+    opacity: 0;
+    background: #00ccff;
+    padding: 0;
+    height: 0px !important; }
+
+.animate-hover {
   transition: all ease-in-out 0.5s, ease-in-out, ease-in-out, ease-in-out, ease-in-out, ease-in-out;
   -o-transition: all ease-in-out 0.5s, ease-in-out, ease-in-out, ease-in-out, ease-in-out, ease-in-out;
   -moz-transition: all ease-in-out 0.5s, ease-in-out, ease-in-out, ease-in-out, ease-in-out, ease-in-out;
   -webkit-transition: all ease-in-out 0.5s, ease-in-out, ease-in-out, ease-in-out, ease-in-out, ease-in-out;
-  opacity: 1;
-  background: #33d6ff;
-  padding: 10px 0; }
-  .animate-hide.ng-hide {
-    opacity: 0;
-    background: #00ccff;
-    padding: 0; }
-
-.animate-hover {
-  transition: all ease-in-out 0.75s, ease-in-out, ease-in-out, ease-in-out, ease-in-out, ease-in-out;
-  -o-transition: all ease-in-out 0.75s, ease-in-out, ease-in-out, ease-in-out, ease-in-out, ease-in-out;
-  -moz-transition: all ease-in-out 0.75s, ease-in-out, ease-in-out, ease-in-out, ease-in-out, ease-in-out;
-  -webkit-transition: all ease-in-out 0.75s, ease-in-out, ease-in-out, ease-in-out, ease-in-out, ease-in-out;
   opacity: 0.6 !important; }
   .animate-hover:hover {
     opacity: 1 !important; }

@@ -214,14 +214,18 @@ html, body {
   height: 60px;
   left: 0%;
   top: 0%;
+  -moz-user-select: none;
+  -vebkit-user-select: none;
+  -o-user-select: none;
+  cursor: default;
   position: absolute;
   z-index: 1000 !important;
-  background: rgba(102, 224, 255, 0.85); }
+  background: #66e0ff; }
   #user-panel h1 {
     width: 400px;
     height: 60px;
-    left: calc(10% + 110px);
-    top: -110px;
+    left: calc(10% + 95px);
+    top: -82px;
     display: block;
     position: relative;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -231,16 +235,56 @@ html, body {
   border: none;
   margin: 0px;
   padding: 0px;
-  width: 80px;
-  height: 110px;
+  width: 70px !important;
+  height: 70px !important;
   left: 10%;
   top: 0%;
-  position: relative; }
+  -webkit-border-radius: 35px;
+  -moz-border-radius: 35px;
+  border-radius: 35px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  transition: all ease-in-out 0.5s, ease-in-out, ease-in-out, ease-in-out, ease-in-out, ease-in-out;
+  -o-transition: all ease-in-out 0.5s, ease-in-out, ease-in-out, ease-in-out, ease-in-out, ease-in-out;
+  -moz-transition: all ease-in-out 0.5s, ease-in-out, ease-in-out, ease-in-out, ease-in-out, ease-in-out;
+  -webkit-transition: all ease-in-out 0.5s, ease-in-out, ease-in-out, ease-in-out, ease-in-out, ease-in-out;
+  -moz-user-select: none;
+  -vebkit-user-select: none;
+  -o-user-select: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden; }
   #user-img img {
-    -webkit-border-radius: 12px;
-    -moz-border-radius: 12px;
-    border-radius: 12px;
-    border: 10px solid rgba(102, 224, 255, 0.85);
-    display: block;
-    height: 100%;
-    margin: auto; }
+    border: none;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    height: auto; }
+  #user-img:hover, #user-img:active {
+    width: 300px !important;
+    height: 300px !important;
+    left: 10%;
+    top: 0%;
+    -webkit-border-radius: 150px;
+    -moz-border-radius: 150px;
+    border-radius: 150px; }
+
+#user-info {
+  border: none;
+  margin: 0px;
+  padding: 0px;
+  width: 200px;
+  height: 35px;
+  left: calc(10% + 236px);
+  top: -167px;
+  -moz-user-select: none;
+  -vebkit-user-select: none;
+  -o-user-select: none;
+  cursor: default;
+  border-right: 6px solid white;
+  background: rgba(102, 224, 255, 0.75);
+  position: relative;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 28px;
+  text-align: center;
+  padding: 6px;
+  color: white; }

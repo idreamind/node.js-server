@@ -53,6 +53,13 @@ $T4: ease-in-out, $T5: ease-in-out, $T6: ease-in-out ) {
   padding: 0px;
 }
 
+@mixin setSelection( $C: default ) {
+  -moz-user-select: none;
+  -vebkit-user-select: none;
+  -o-user-select: none;
+  cursor: $C;
+}
+
 // Id:   ---------------------------------------------------------------------|
 #main {
   @include setBorderRadius( 8px );
@@ -263,11 +270,12 @@ $T4: ease-in-out, $T5: ease-in-out, $T6: ease-in-out ) {
   @include reset();
   @include boxShadow();
   @include setRectWHXY(100%, 60px);
+  @include setSelection();
   position: absolute;
   z-index: 1000 !important;
-  background: rgba(102, 224, 255, 0.85);
+  background: rgba(102, 224, 255, 1);
   h1 {
-    @include setRectWHXY(400px, 60px, calc(10% + 110px), -110px);
+    @include setRectWHXY(400px, 60px, calc(10% + 95px), -82px);
     display: block;
     position: relative;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -277,14 +285,34 @@ $T4: ease-in-out, $T5: ease-in-out, $T6: ease-in-out ) {
 
 #user-img {
   @include reset();
-  @include setRectWHXY(80px, 110px, 10%);
+  @include setRectWHXY(70px !important, 70px !important, 10%);
+  @include setBorderRadius( 35px );
+  @include boxShadow(10px, 0.5);
+  @include setTransition( all ease-in-out 0.5s );
+  @include setSelection( pointer );
   position: relative;
+  overflow: hidden;
   img {
-    @include setBorderRadius(12px);
-    border: 10px solid rgba(102, 224, 255, 0.85);
-    display: block;
-    height: 100%;
-    margin: auto;
+    @include reset();
+    width: 100%;
+    height: auto;
+  }
+  &:hover, &:active {
+    @include setRectWHXY(300px !important, 300px !important, 10%);
+    @include setBorderRadius( 150px );
   }
 }
 
+#user-info {
+  @include reset();
+  @include setRectWHXY(200px, 35px, calc(10% + 236px), -167px);
+  @include setSelection();
+  border-right: 6px solid $WHITE;
+  background:  rgba(102, 224, 255, 0.75);
+  position: relative;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 28px;
+  text-align: center;
+  padding: 6px;
+  color: $WHITE;
+}

@@ -12,20 +12,23 @@ $BLUE: #00CCFF;
 
 // Code 1:   -----------------------------------------------------------------|
 .animate-hide {
-  @include setTransition(all ease-in-out 0.5s);
+  @include setTransition(all ease-in-out 0.3s);
+  overflow: hidden;
   opacity: 1;
   background: lighten($BLUE, 10%);
   padding: 10px 0;
+  height: 125px !important;
   &.ng-hide {
     opacity: 0;
     background: $BLUE;
     padding: 0;
+    height: 0px !important;
   }
 }
 
 // Code 2:   -----------------------------------------------------------------|
 .animate-hover {
-  @include setTransition(all ease-in-out 0.75s);
+  @include setTransition(all ease-in-out 0.5s);
   opacity: 0.6 !important;
   &:hover {
     opacity: 1 !important;
