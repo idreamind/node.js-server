@@ -13,10 +13,10 @@ html, body {
   width: 80%;
   height: auto;
   margin: auto;
-  top: 100px;
+  top: 80px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.75);
   background: #00ccff;
-  padding-bottom: 30px; }
+  padding-bottom: 60px; }
 
 #plot-view {
   width: 100%;
@@ -93,7 +93,7 @@ html, body {
 .h-range-data, .v-range-data {
   position: absolute;
   left: 5%;
-  top: 550px;
+  top: 615px;
   width: 250px; }
 
 .v-range-data {
@@ -109,7 +109,7 @@ html, body {
   position: absolute;
   width: 36px;
   height: 20px;
-  top: 520px;
+  top: 585px;
   color: white;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.6);
   text-align: center;
@@ -205,6 +205,21 @@ html, body {
     height: 40px;
     width: 165px; }
 
+.day-label {
+  -webkit-transform: rotate(36deg);
+  -moz-transform: rotate(36deg);
+  -o-transform: rotate(36deg);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  position: absolute;
+  width: 45px;
+  height: 30px;
+  color: white;
+  text-align: center;
+  bottom: 20px;
+  top: auto;
+  right: auto;
+  font-size: 16dpi; }
+
 #user-panel {
   border: none;
   margin: 0px;
@@ -281,7 +296,7 @@ html, body {
   -o-user-select: none;
   cursor: default;
   border-right: 6px solid white;
-  background: rgba(102, 224, 255, 0.75);
+  background: rgba(102, 224, 255, 0.95);
   position: relative;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 28px;

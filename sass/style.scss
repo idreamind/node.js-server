@@ -35,7 +35,7 @@ $T4: ease-in-out, $T5: ease-in-out, $T6: ease-in-out ) {
   left: $X;  top: $Y;
 }
 
-@mixin centreted( $W: 80%, $H: auto, $T: 100px  ) {
+@mixin centreted( $W: 80%, $H: auto, $T: 80px  ) {
   display: block;
   position: relative;
   width: $W; height: $H;
@@ -60,13 +60,18 @@ $T4: ease-in-out, $T5: ease-in-out, $T6: ease-in-out ) {
   cursor: $C;
 }
 
+@mixin transform( $angle: 90deg ) {
+  -webkit-transform: rotate( $angle );
+  -moz-transform: rotate( $angle );
+  -o-transform: rotate( $angle );
+}
 // Id:   ---------------------------------------------------------------------|
 #main {
   @include setBorderRadius( 8px );
   @include centreted();
   @include boxShadow();
   background: $BLUE;
-  padding-bottom: 30px;
+  padding-bottom: 60px;
 }
 
 #plot-view {
@@ -80,7 +85,6 @@ $T4: ease-in-out, $T5: ease-in-out, $T6: ease-in-out ) {
   @include centreted(90%, auto, 10px);
   height: 500px;
   border: 3px solid white;
-
 }
 
 #plot-settings, #plot-layout {
@@ -131,7 +135,7 @@ $T4: ease-in-out, $T5: ease-in-out, $T6: ease-in-out ) {
 
 .h-range-data, .v-range-data {
   position: absolute;
-  left: 5%; top: 550px;
+  left: 5%; top: 615px;
   width: 250px;
 }
 
@@ -147,7 +151,7 @@ $T4: ease-in-out, $T5: ease-in-out, $T6: ease-in-out ) {
   position: absolute;
   width: 36px;
   height: 20px;
-  top: 520px;
+  top: 585px;
   color: white;
   box-shadow: 0 0 3px rgba(0,0,0,0.6);
   text-align: center;
@@ -264,6 +268,19 @@ $T4: ease-in-out, $T5: ease-in-out, $T6: ease-in-out ) {
   }
 }
 
+.day-label {
+  @include transform( 36deg );
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  position: absolute;
+  width: 45px;
+  height: 30px;
+  color: $WHITE;
+  text-align: center;
+  bottom: 20px;
+  top: auto; right: auto;
+  font-size: 16dpi;
+}
+
 // UserPanel CSS:   -----------------------------------------------------------|
 
 #user-panel {
@@ -308,7 +325,7 @@ $T4: ease-in-out, $T5: ease-in-out, $T6: ease-in-out ) {
   @include setRectWHXY(200px, 35px, calc(10% + 236px), -167px);
   @include setSelection();
   border-right: 6px solid $WHITE;
-  background:  rgba(102, 224, 255, 0.75);
+  background:  rgba(102, 224, 255, 0.95);
   position: relative;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 28px;

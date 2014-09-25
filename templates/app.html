@@ -76,10 +76,13 @@
                             {{mv.inputData.goal}}
                         </text>
                     </svg>
+                    <div class="day-label" ng-repeat="vGrid in mv.vGridArr" style="left: {{vGrid * mv.step}}px;">
+                        {{mv.daysArr[vGrid - 1]}}
+                    </div>
                     <input type="range" ng-init="mv.settingsData.h_range = 50"
                                         ng-model="mv.settingsData.h_range"
                                         ng-change="mv.stepWatcher()" min="10" max="250" class="h-range-data">
-                    <label class="data-label-h" style="left: calc(5% + {{mv.settingsData.h_range - 25}}px);">
+                    <label class="data-label-h" style="left: calc(5% + {{mv.settingsData.h_range - 22}}px);">
                         {{mv.settingsData.h_range}}
                     </label>
 

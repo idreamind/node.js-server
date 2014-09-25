@@ -34,6 +34,7 @@ function plotDataCtrl($window, dataLoadService) {
     mv.step = 50;
     mv.hmax = 200;
     mv.koff = 800;
+    mv.lastDay = "";
     mv.elem = document.getElementById("plot-view-svg");
     mv.svgHeight = parseFloat($window.getComputedStyle(mv.elem, null).height);
     mv.svgWidth = parseFloat($window.getComputedStyle(mv.elem, null).width);
@@ -210,6 +211,7 @@ function plotDataCtrl($window, dataLoadService) {
 
     // Load data from Server | mv
     function setDataFromServer() {
+        var data_ = "";
         dataLoadService.getSData()
             .then(function(dataFrom) {
                 mv.inputData.weight = dataFrom.weight.replace(/,/g, " ");
@@ -217,6 +219,8 @@ function plotDataCtrl($window, dataLoadService) {
                 mv.inputData.water = dataFrom.water.replace(/,/g, " ");
                 mv.inputData.goal = dataFrom.goal;
                 mv.inputData.when = dataFrom.when;
+                mv.daysArr = dataFrom.days.split(" ");
+                mv.lastDay = dataFrom.days.split(" ");
                 // Data-processing for viewer:
                 mv.changePlotData('weight');
                 mv.changePlotData('fat');
@@ -227,28 +231,40 @@ function plotDataCtrl($window, dataLoadService) {
 /*--------------------------------------------------------------------------------------------------------------------*/
 
     function saveDataToServer() {
-        var dataToServer = {
-            days: "",
-            weight: mv.inputData.weight,
-            fat: mv.inputData.fat,
-            water: mv.inputData.water,
-            goal: mv.inputData.goal,
-            when: mv.inputData.when
-        };
 
-        // And server-controller:
-        dataLoadService.rewriteSData( dataToServer )
-            .then(function(dataFrom) {
-                mv.inputData.weight = dataFrom.weight.replace(/,/g, " ");
-                mv.inputData.fat = dataFrom.fat.replace(/,/g, " ");
-                mv.inputData.water = dataFrom.water.replace(/,/g, " ");
-                mv.inputData.goal = dataFrom.goal;
-                mv.inputData.when = dataFrom.when;
-                // Data-processing for viewer:
-                mv.changePlotData('weight');
-                mv.changePlotData('fat');
-                mv.changePlotData('water');
-            });
+        var date = new Date(),
+            newDay = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear(),
+            newArr = mv.daysArr.join(" ") + " " + newDay,
+            last = mv.lastDay;
+
+        if( last[ last.length - 1 ] == newDay  ) {
+            console.log( " Nothing to change " );
+        } else {
+            var dataToServer = {
+                days: newArr,
+                weight: mv.inputData.weight,
+                fat: mv.inputData.fat,
+                water: mv.inputData.water,
+                goal: mv.inputData.goal,
+                when: mv.inputData.when
+            };
+
+            // And server-controller:
+            dataLoadService.rewriteSData(dataToServer)
+                .then(function (dataFrom) {
+                    mv.inputData.weight = dataFrom.weight.replace(/,/g, " ");
+                    mv.inputData.fat = dataFrom.fat.replace(/,/g, " ");
+                    mv.inputData.water = dataFrom.water.replace(/,/g, " ");
+                    mv.inputData.goal = dataFrom.goal;
+                    mv.inputData.when = dataFrom.when;
+                    mv.data_ = dataFrom.days.split(" ");
+                    // Data-processing for viewer:
+                    mv.changePlotData('weight');
+                    mv.changePlotData('fat');
+                    mv.changePlotData('water');
+                });
+            mv.setDataFromServer();
+        }
     }
 
 /*--------------------------------------------------------------------------------------------------------------------*/
@@ -262,11 +278,13 @@ function plotDataCtrl($window, dataLoadService) {
                 mv.inputData.water = dataFrom.water.replace(/,/g, " ");
                 mv.inputData.goal = dataFrom.goal;
                 mv.inputData.when = dataFrom.when;
+                mv.data_ = dataFrom.days.split(" ");
                 // Data-processing for viewer:
                 mv.changePlotData('weight');
                 mv.changePlotData('fat');
                 mv.changePlotData('water');
             });
+        mv.setDataFromServer();
     }
 
 /*--------------------------------------------------------------------------------------------------------------------*/
