@@ -172,7 +172,8 @@ html, body {
   height: 30px;
   width: 100px;
   color: #00ccff;
-  font-weight: bold; }
+  font-weight: bold;
+  margin-bottom: 3px !important; }
 
 .buttons-long {
   width: 200px;

@@ -3,6 +3,8 @@
     <head lang="en">
         <meta charset="UTF-8">
         <title>GymGoal</title>
+        <link rel="stylesheet" type="text/css" href="../bower_components/bootstrap/dist/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="../bower_components/ngAnimate/css/fontello/css/fontello.css">
         <link rel="stylesheet" type="text/css" href="../css/style.css">
         <link rel="stylesheet" type="text/css" href="../css/animation.css">
         <link rel="stylesheet" type="text/css" href="../bower_components/angular/angular-csp.css">
@@ -10,7 +12,7 @@
 
     <body ng-controller="plotDataCtrl as mv">
 
-        <upanel>*</upanel>
+        <upanel></upanel>
 
         <panoramic picture-src="../image/gym-hop.png" picture-width="50"
                    set-x="{{mv.settingsData.h_range}}"
@@ -32,12 +34,14 @@
                                        ng-change="mv.changePlotData( 'water' )"
                                        ng-keyup="mv.validation('water')" id="water" placeholder="Enter your water % here" class="plot-data">
                     <div class="data-line">
-                        <input type="text" ng-model="mv.inputData.goal"
-                                           ng-change="mv.handleGoalPoin()"
-                                           ng-keyup="mv.validation('goal')" id="goal" placeholder="Enter you goal" class="plot-data-small">
-                        <input type="text" ng-model="mv.inputData.when"
-                                           ng-change="mv.handleGoalPoin()"
-                                           ng-keyup="mv.validation('when')" id="when" placeholder="Enter date" class="plot-data-small">
+                        <input type="number" value="{{mv.inputData.goal}}"
+                                             ng-model="mv.inputData.goal"
+                                             ng-change="mv.handleGoalPoin()"
+                                             ng-keyup="mv.validation('goal')" id="goal" placeholder="Enter you goal" class="plot-data-small">
+                        <input type="number" value="{{mv.inputData.when}}"
+                                             ng-model="mv.inputData.when"
+                                             ng-change="mv.handleGoalPoin()"
+                                             ng-keyup="mv.validation('when')" id="when" placeholder="Day" class="plot-data-small">
                         <input type="button" value="simple" ng-click="mv.goalClass='plot-point'" class="buttons">
                         <input type="button" value="mass" ng-click="mv.goalClass='plot-point-mass'" class="buttons">
                         <input type="button" value="force" ng-click="mv.goalClass='plot-point-force'" class="buttons">
@@ -90,7 +94,7 @@
                      <input type="range" ng-init="mv.settingsData.v_range = 100"
                                          ng-model="mv.settingsData.v_range"
                                          ng-change="mv.verticalWatcher()" min="5" max="200" value="50" class="v-range-data">
-                     <label class="data-label-v" style="bottom: calc({{mv.settingsData.v_range}}px + 60px);">
+                     <label class="data-label-v" style="bottom: calc({{mv.settingsData.v_range}}px + 51px);">
                         {{mv.settingsData.v_range}}
                      </label>
                 </div>

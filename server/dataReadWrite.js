@@ -60,13 +60,6 @@ function rewriteData( response,  newData ) {
     newData.weight = newData.weight.concat( stringEnd );
     newData.fat = newData.fat.concat( stringEnd );
     newData.water = newData.water.concat( stringEnd );
-//    newData.goal = newData.goal.toString();
-//    newData.goal = newData.goal.concat( stringEnd );
-//    newData.when = newData.when.toString();
-//    newData.when = newData.when.concat( stringEnd );
-
-    console.log( "else data: " + newData.water );
-    console.log( "when goal 2: " + newData.when );
 
     setData = JSON.stringify( newData );
 
@@ -136,6 +129,8 @@ function deleteLatest( response ) {
             setData = JSON.parse( data );
 
             setData.days = handleObj( setData.days, stringEnd );
+            setData.days = setData.days.replace(/,/g, " ");
+            setData.days = setData.days.slice(0, -2) + stringEnd;
             setData.weight = handleObj( setData.weight, stringEnd );
             setData.fat = handleObj( setData.fat, stringEnd );
             setData.water = handleObj( setData.water, stringEnd );

@@ -211,7 +211,6 @@ function plotDataCtrl($window, dataLoadService) {
 
     // Load data from Server | mv
     function setDataFromServer() {
-        var data_ = "";
         dataLoadService.getSData()
             .then(function(dataFrom) {
                 mv.inputData.weight = dataFrom.weight.replace(/,/g, " ");
@@ -257,7 +256,6 @@ function plotDataCtrl($window, dataLoadService) {
                     mv.inputData.water = dataFrom.water.replace(/,/g, " ");
                     mv.inputData.goal = dataFrom.goal;
                     mv.inputData.when = dataFrom.when;
-                    mv.data_ = dataFrom.days.split(" ");
                     // Data-processing for viewer:
                     mv.changePlotData('weight');
                     mv.changePlotData('fat');
@@ -278,7 +276,7 @@ function plotDataCtrl($window, dataLoadService) {
                 mv.inputData.water = dataFrom.water.replace(/,/g, " ");
                 mv.inputData.goal = dataFrom.goal;
                 mv.inputData.when = dataFrom.when;
-                mv.data_ = dataFrom.days.split(" ");
+                mv.daysArr = dataFrom.replace(/,/g, " ");
                 // Data-processing for viewer:
                 mv.changePlotData('weight');
                 mv.changePlotData('fat');
