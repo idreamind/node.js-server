@@ -34,12 +34,12 @@
                                        ng-change="mv.changePlotData( 'water' )"
                                        ng-keyup="mv.validation('water')" id="water" placeholder="Enter your water % here" class="plot-data">
                     <div class="data-line">
-                        <input type="number" value="{{mv.inputData.goal}}"
-                                             ng-model="mv.inputData.goal"
+                        <input type="number" ng-model="mv.inputData.goal"
+                                             value="{{mv.inputData.goal}}"
                                              ng-change="mv.handleGoalPoin()"
                                              ng-keyup="mv.validation('goal')" id="goal" placeholder="Enter you goal" class="plot-data-small">
-                        <input type="number" value="{{mv.inputData.when}}"
-                                             ng-model="mv.inputData.when"
+                        <input type="number" ng-model="mv.inputData.when"
+                                             value="{{mv.inputData.when}}"
                                              ng-change="mv.handleGoalPoin()"
                                              ng-keyup="mv.validation('when')" id="when" placeholder="Day" class="plot-data-small">
                         <input type="button" value="simple" ng-click="mv.goalClass='plot-point'" class="buttons">

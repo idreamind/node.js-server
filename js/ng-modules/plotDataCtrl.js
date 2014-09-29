@@ -234,10 +234,18 @@ function plotDataCtrl($window, dataLoadService) {
         var date = new Date(),
             newDay = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear(),
             newArr = mv.daysArr.join(" ") + " " + newDay,
+            oldArr = mv.daysArr,
             last = mv.lastDay;
 
         if( last[ last.length - 1 ] == newDay  ) {
-            console.log( " Nothing to change " );
+            var dataToServer = {
+                days: oldArr,
+                weight: mv.inputData.weight,
+                fat: mv.inputData.fat,
+                water: mv.inputData.water,
+                goal: mv.inputData.goal,
+                when: mv.inputData.when
+            };
         } else {
             var dataToServer = {
                 days: newArr,
@@ -247,6 +255,8 @@ function plotDataCtrl($window, dataLoadService) {
                 goal: mv.inputData.goal,
                 when: mv.inputData.when
             };
+        }
+            console.log( "  Data save: " + mv.inputData.when );
 
             // And server-controller:
             dataLoadService.rewriteSData(dataToServer)
@@ -262,7 +272,7 @@ function plotDataCtrl($window, dataLoadService) {
                     mv.changePlotData('water');
                 });
             mv.setDataFromServer();
-        }
+
     }
 
 /*--------------------------------------------------------------------------------------------------------------------*/
