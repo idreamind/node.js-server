@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="5">
+    <title>Test Route</title>
+    <script src="vendors/angular/angular.js"></script>
+</head>
+<body ng-app>
+
+<p>
+    <form method="post" action="../server.js">
+        <input type="text" name="iOne" ng-model="mOne" ng-init="mOne='get/'">
+        <button type="submit">{{mOne}}</button>
+    </form>
+</p>
+
+
+</body>
+</html>

@@ -1,0 +1,9 @@
+html, body {
+    background: #ffff00;
+}
+h1 {
+    font-family: "Roboto", sans-serif;
+    text-align: center;
+    color: #ffffff;
+    text-shadow: 0 0 6px rgba(0,0,0,0.6);
+}
